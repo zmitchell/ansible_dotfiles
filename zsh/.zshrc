@@ -21,7 +21,7 @@ zstyle :compinstall filename $HOME/.zshrc
 # Only check whether the .zcompdump file needs to be reloaded
 # once per day, rather than every time the shell loads.
 autoload -Uz compinit
-if [ $(uname) == Linux ]; then
+if [ $(uname) = Linux ]; then
   if [ $(expr $(date +"%j") - $(stat -c %Y $HOME/.zcompdump)) > 86400 ]; then
     compinit
   else
