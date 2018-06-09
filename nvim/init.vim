@@ -30,7 +30,7 @@ if dein#load_state('/Users/zmitchell/.config/nvim/bundle')
 
   " Let dein manage dein
   " Required:
-  call dein#add('/Users/zmitchell/.config/nvim/bundle/repos/github.com/Shougo/dein.vim')
+  call dein#add('$HOME/.config/nvim/bundle/repos/github.com/Shougo/dein.vim')
 
   " You can specify revision/branch/tag.
   call dein#add('Shougo/deol.nvim', { 'rev': 'a1b5108fd' })
@@ -63,8 +63,8 @@ function! s:my_cr_function() abort
 endfunction
 
 " deoplete-rust settings
-let g:deoplete#sources#rust#racer_binary='/Users/zmitchell/.cargo/bin/racer'
-let g:deoplete#sources#rust#rust_source_path='/Users/zmitchell/projects/rust-src/rust/src'
+let g:deoplete#sources#rust#racer_binary='$HOME/.cargo/bin/racer'
+let g:deoplete#sources#rust#rust_source_path='$HOME/projects/rust-src/rust/src'
 
 " syntastic settings ---------------------------------------------------------
 let g:syntastic_always_populate_loc_list = 0
