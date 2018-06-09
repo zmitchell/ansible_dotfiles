@@ -7,8 +7,8 @@ endif
 set runtimepath+=$HOME/.config/nvim/bundle/repos/github.com/Shougo/dein.vim
 
 " Required:
-if dein#load_state('/Users/zmitchell/.config/nvim/bundle')
-  call dein#begin('/Users/zmitchell/.config/nvim/bundle')
+if dein#load_state('$HOME/.config/nvim/bundle')
+  call dein#begin('$HOME/.config/nvim/bundle')
   call dein#add('Shougo/deoplete.nvim')
   call dein#add('Shougo/echodoc.vim')
   call dein#add('vim-syntastic/syntastic')
