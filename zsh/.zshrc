@@ -22,7 +22,7 @@ zstyle :compinstall filename $HOME/.zshrc
 # once per day, rather than every time the shell loads.
 autoload -Uz compinit
 if [ $(uname) = Linux ]; then
-  if [ $(expr $(date +"%j") - $(stat -c %Y $HOME/.zcompdump)) \> 86400 ]; then
+  if [ expr $(expr $(date +"%j") - $(stat -c %Y $HOME/.zcompdump)) \> 86400 ]; then
     compinit
   else
     compinit -C
