@@ -22,7 +22,7 @@ zstyle :compinstall filename $HOME/.zshrc
 # once per day, rather than every time the shell loads.
 autoload -Uz compinit
 if [ $(uname) = Linux ]; then
-  if [ $(expr $(date +"%j") - $(stat -c %Y $HOME/.zcompdump)) > 86400 ]; then
+  if [ $(expr $(date +"%j") - $(stat -c %Y $HOME/.zcompdump)) \> 86400 ]; then
     compinit
   else
     compinit -C
@@ -37,6 +37,7 @@ fi
 
 # zsh-completions
 fpath=(/usr/local/share/zsh-completions $fpath)
+fpath=($HOME/.dotfiles/zsh/rustup-completions $fpath)
 
 # Needed for (neo)vim's base16 color support
 BASE16_SHELL=$HOME/.config/base16-shell/
