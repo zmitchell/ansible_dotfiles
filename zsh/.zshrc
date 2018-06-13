@@ -18,6 +18,18 @@ bindkey -e
 
 zstyle :compinstall filename $HOME/.zshrc
 
+################################################################################
+# Extra Completions
+################################################################################
+
+# fpath=($HOME/.dotfiles/zsh/rustup-completions $fpath)
+fpath=($HOME/.dotfiles/zsh/my-completions/rustup_completions $fpath)
+fpath=($HOME/.dotfiles/zsh/my-completions/poetry_completions $fpath)
+
+################################################################################
+# Rebuilding .zcompdump
+################################################################################
+
 # Only check whether the .zcompdump file needs to be reloaded
 # once per day, rather than every time the shell loads.
 autoload -Uz compinit
@@ -37,11 +49,18 @@ fi
 
 # zsh-completions
 fpath=(/usr/local/share/zsh-completions $fpath)
-fpath=($HOME/.dotfiles/zsh/rustup-completions $fpath)
+
+################################################################################
+# base16-shell support
+################################################################################
 
 # Needed for (neo)vim's base16 color support
 BASE16_SHELL=$HOME/.config/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+
+################################################################################
+# Tweaks
+################################################################################
 
 # auto-cd
 setopt auto_cd

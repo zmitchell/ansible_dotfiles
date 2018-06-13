@@ -13,3 +13,11 @@ alias ga='git add'
 alias gpush='git push origin master'
 alias gpull='git pull origin master'
 function mkcd () mkdir "$1" && cd "$1"
+function getpass () {
+    op get item "$1" | jq '.details.fields[] | select(.designation=="password").value'
+}
+function ghclone () {
+    prefix="https://github.com/"
+    suffix=".git"
+    git clone "$prefix$1$suffix"
+}
