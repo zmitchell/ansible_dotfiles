@@ -19,36 +19,53 @@ bindkey -e
 zstyle :compinstall filename $HOME/.zshrc
 
 ################################################################################
-# Extra Completions
+# Completion settings
 ################################################################################
 
-# fpath=($HOME/.dotfiles/zsh/rustup-completions $fpath)
-fpath=($HOME/.dotfiles/zsh/my-completions/rustup_completions $fpath)
-fpath=($HOME/.dotfiles/zsh/my-completions/poetry_completions $fpath)
+# Manually generated completions from user-installed packages
+fpath=($HOME/.dotfiles/zsh/my-completions $fpath)
 
-################################################################################
-# Rebuilding .zcompdump
-################################################################################
+# Built-in completions
+fpath=(/usr/local/share/zsh-completions $fpath)
+
+# up arrow history completion
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey "^[[A" up-line-or-beginning-search # Up
+bindkey "^[[B" down-line-or-beginning-search # Down
+
+# Allow completion navigation with arrow keys
+zstyle ":completion:*" menu select
+
+# Separate completions by group/category
+zstyle ':completion:*' format $'Completing %d\n'
+
+# Case-insensitive completion
+zstyle ':completion:*' matcher-list 'm:{a-zA-z}={A-Za-z}'
+
+# colors: magenta, green, blue,cyan, yellow, red
+zstyle ':completion:*:functions' ignored-patterns '_*'
+zstyle ':completion:*' format $'\n%F{yellow}Completing %d%f\n'
+zstyle ':completion:*' group-name ''
 
 # Only check whether the .zcompdump file needs to be reloaded
 # once per day, rather than every time the shell loads.
 autoload -Uz compinit
 if [ $(uname) = Linux ]; then
-  if [ $(expr $(expr $(date +"%s") - $(stat -c %Y $HOME/.zcompdump)) \> 86400) ]; then
+  if [ $(expr $(expr $(date +"%s") - $(stat -c %Y $HOME/.dotfiles/zsh/.zcompdump)) \> 86400) ]; then
     compinit
   else
     compinit -C
   fi
 else
-  if [ $(date +'%j') != $(stat -f '%Sm' -t '%j' ~/.zcompdump) ]; then
+  if [ $(date +'%j') != $(stat -f '%Sm' -t '%j' $HOME/.dotfiles/zsh/.zcompdump) ]; then
     compinit
   else
     compinit -C
   fi
 fi
-
-# zsh-completions
-fpath=(/usr/local/share/zsh-completions $fpath)
 
 ################################################################################
 # base16-shell support
@@ -64,15 +81,6 @@ BASE16_SHELL=$HOME/.config/base16-shell/
 
 # auto-cd
 setopt auto_cd
-
-# up arrow history completion
-autoload -U up-line-or-beginning-search
-autoload -U down-line-or-beginning-search
-zle -N up-line-or-beginning-search
-zle -N down-line-or-beginning-search
-bindkey "^[[A" up-line-or-beginning-search # Up
-bindkey "^[[B" down-line-or-beginning-search # Down
-
 
 ################################################################################
 # Separate configs
